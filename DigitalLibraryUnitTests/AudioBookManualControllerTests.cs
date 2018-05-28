@@ -195,8 +195,7 @@ namespace DigitalLibraryUnitTests
 
             audioBooksService.Verify(x => x.Delete(It.Is<Guid>(guid => guid == id)));
         }
-
-
+        
         [Fact]
         public async Task Delete_BadIdPassed_ProperFunctionsCalled()
         {
