@@ -195,31 +195,5 @@ namespace DigitalLibraryUnitTests
 
             audioBooksService.Verify(x => x.Delete(It.Is<Guid>(guid => guid == id)));
         }
-        
-        [Fact]
-        public async Task Delete_BadIdPassed_ProperFunctionsCalled()
-        {
-            var id = Guid.NewGuid();
-
-            var audioBooksService = new Mock<IAudioBookServiceAsync>();
-
-            var apiController = new AudioBookManualController(audioBooksService.Object);
-            audioBooksService.Setup(x => x.Delete(It.IsAny<Guid>())).Throws(new InvalidOperationException());
-
-            await Assert.ThrowsAsync<InvalidOperationException>(() => apiController.DeleteConfirmed(id));
-        }
-
-        [Fact]
-        public async Task Delete_BadIdPassed_ProperFunctionsCalled()
-        {
-            var id = Guid.NewGuid();
-
-            var audioBooksService = new Mock<IAudioBookServiceAsync>();
-
-            var apiController = new AudioBookManualController(audioBooksService.Object);
-            audioBooksService.Setup(x => x.Delete(It.IsAny<Guid>())).Throws(new InvalidOperationException());
-
-            await Assert.ThrowsAsync<InvalidOperationException>(() => apiController.DeleteConfirmed(id));
-        }
     }
 }
