@@ -8,13 +8,6 @@ init:
   - cmd: git config --global core.autocrlf true
 install:
   # Install repo specific stuff here
-  - ps: $urlCurrent = "https://download.microsoft.com/download/F/A/A/FAAE9280-F410-458E-8819-279C5A68EDCF/dotnet-sdk-2.0.0-preview2-006497-win-x64.zip"
-  - ps: $env:DOTNET_INSTALL_DIR = "$pwd\.dotnetsdk"
-  - ps: mkdir $env:DOTNET_INSTALL_DIR -Force | Out-Null
-  - ps: $tempFileCurrent = [System.IO.Path]::GetTempFileName()
-  - ps: (New-Object System.Net.WebClient).DownloadFile($urlCurrent, $tempFileCurrent)
-  - ps: Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::ExtractToDirectory($tempFileCurrent, $env:DOTNET_INSTALL_DIR)
-  - ps: $env:Path = "$env:DOTNET_INSTALL_DIR;$env:Path"
 before_build:
   # Display .NET Core version
   - cmd: dotnet --version
@@ -26,9 +19,7 @@ build_script:
 after_build:
   # For once the build has completed
 artifacts:
- - path: '\src\bin\Debug\netcoreapp2.0\publish'
-   name: WebSite
-   type: WebDeployPackage
+
 clone_depth: 1
 test_script:
   # restore packages for our unit tests
